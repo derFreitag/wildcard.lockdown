@@ -1,0 +1,10 @@
+include *.rst
+include *.txt
+include .coveragerc
+include buildout.cfg
+recursive-include docs *.GPL
+recursive-include docs *.txt
+recursive-include wildcard *.png
+recursive-include wildcard *.py
+recursive-include wildcard *.xml
+recursive-include wildcard *.zcml
