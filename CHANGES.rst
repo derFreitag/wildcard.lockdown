@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1 (unreleased)
-----------------
+2.0.0a (2018-04-18)
+-------------------
 
 - Allow to display a status message for logged in users when the lockdown is
   enabled.
