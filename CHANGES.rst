@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.0a1 (unreleased)
---------------------
+2.0.0a.post0 (2021-05-10)
+-------------------------
 
 - Make it py3 compatible.
   [gforcada]
