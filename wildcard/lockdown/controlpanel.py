@@ -2,17 +2,17 @@ from plone.app.registry.browser import controlpanel
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from wildcard.lockdown import _
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from wildcard.lockdown import getConditionNames
 from wildcard.lockdown.interfaces import ISettings
 
 
+@implementer(IVocabularyFactory)
 class ConditionsVocabulary(object):
     """Creates a vocabulary with all the routes available on the
     site.
     """
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         items = []
