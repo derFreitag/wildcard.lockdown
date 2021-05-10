@@ -4,8 +4,8 @@ Changelog
 2.0.0a1 (unreleased)
 --------------------
 
-- Nothing changed yet.
-
+- Make it py3 compatible.
+  [gforcada]
 
 2.0.0a (2018-04-18)
 -------------------
