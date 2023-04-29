@@ -37,7 +37,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Products.CMFPlone',
-        'plone.api >=1.0.0,<=1.99.99',
+        'plone.api',
         'plone.app.registry',
         'setuptools',
         'z3c.autoinclude',
