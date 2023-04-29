@@ -4,8 +4,8 @@ Changelog
 2.0.0a0.post1 (unreleased)
 --------------------------
 
-- Nothing changed yet.
-
+- Drop plone.api version restrictions.
+  [gforcada]
 
 2.0.0a.post0 (2021-05-10)
 -------------------------
