@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0a0.post1 (unreleased)
+2.0.0a0.post1 (2023-04-29)
 --------------------------
 
 - Drop plone.api version restrictions.
