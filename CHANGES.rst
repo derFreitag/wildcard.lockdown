@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0a0.post2 (unreleased)
+2.0.0a0.post2 (2025-09-23)
 --------------------------
 
 - Drop `z3c.autoinclude`, it breaks with other `z3c` distributions that switched
