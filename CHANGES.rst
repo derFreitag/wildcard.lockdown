@@ -4,8 +4,9 @@ Changelog
 2.0.0a0.post2 (unreleased)
 --------------------------
 
-- Nothing changed yet.
-
+- Drop `z3c.autoinclude`, it breaks with other `z3c` distributions that switched
+  to native namespaces. Fortunately, `plone.autoinclude` is a drop-in replacement.
+  [gforcada]
 
 2.0.0a0.post1 (2023-04-29)
 --------------------------
