@@ -1,9 +1,7 @@
 global-exclude *pyc
 include setup.py
-include *.rst *.txt
+include *.md *.txt
 exclude .coveragerc
-recursive-include docs *.GPL
-recursive-include docs *.txt
 graft src
 include pyproject.toml
 recursive-exclude news *

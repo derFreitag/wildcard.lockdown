@@ -1,5 +1,6 @@
 """Package setup."""
 
+from pathlib import Path
 from setuptools import setup
 
 version = "2.0.0a0.post3.dev0"
@@ -11,9 +12,8 @@ setup(
         "Plone add-on to be able to make your site read-only except for a set "
         "of conditions that can be defined and enabled/disabled."
     ),
-    long_description=(
-        open("README.rst").read() + "\n" + open("CHANGES.rst").read() + "\n"
-    ),
+    long_description=f"{Path('README.md').read_text()}\n{Path('CHANGES.md').read_text()}",
+    long_description_content_type="text/markdown",
     # Get more strings from
     # http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
