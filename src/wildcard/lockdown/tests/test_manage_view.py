@@ -67,7 +67,7 @@ class TestManageView(unittest.TestCase):
             self._adjust_dict_to_json(self._get_options_as_dict()), new_options
         )
 
-    def test_omited_options_remains_unchanged(self):
+    def test_omitted_options_remains_unchanged(self):
         old_options = {
             "enabled": False,
             "activated": {"All POST"},
