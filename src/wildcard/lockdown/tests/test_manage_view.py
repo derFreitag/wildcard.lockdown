@@ -109,7 +109,3 @@ class TestManageView(unittest.TestCase):
 
     def _get_options_as_dict(self):
         return {k: getattr(self._settings, k) for k in ISettings}
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

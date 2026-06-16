@@ -85,7 +85,3 @@ class RegistryUninstallTest(unittest.TestCase):
         cp = getToolByName(self.portal, "portal_controlpanel")
         actions = [a.getAction(self)["id"] for a in cp.listActions()]
         self.assertTrue("lockdown" not in actions)
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
