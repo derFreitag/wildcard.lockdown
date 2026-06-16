@@ -9,6 +9,18 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0a0.post0 (2026-06-16)
+
+Bug fixes:
+
+- Adjust tests to work with Plone 6.2 @gforcada
+
+Internal:
+
+- Move to native namespace @gforcada
+- Update configuration files.
+  [plone devs]
+
 ## 2.0.0a0.post2 (2025-09-23)
 
 - Drop `z3c.autoinclude`, it breaks with other `z3c` distributions that switched
