@@ -54,7 +54,7 @@ def browserLogin(portal, browser, username=None, password=None):
             password = TEST_USER_PASSWORD
         browser.getControl(name="__ac_name").value = username
         browser.getControl(name="__ac_password").value = password
-        browser.getControl(name="submit").click()
+        browser.getControl("Log in").click()
     finally:
         browser.handleErrors = handleErrors
 
