@@ -3,7 +3,7 @@
 from pathlib import Path
 from setuptools import setup
 
-version = "2.0.0a0.post3.dev0"
+version = "3.0.0a0.post0"
 
 setup(
     name="wildcard.lockdown",
