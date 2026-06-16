@@ -82,9 +82,9 @@ class TestLockdown(unittest.TestCase):
         message = "This site is in read-only mode!!!"
         self.activateCondition()
         self.browser.open(self.portal_url)
-        self.assertFalse(message.encode("utf8") in self.browser.contents)
+        self.assertNotIn(message, self.browser.contents)
 
         self._settings.status_message = message
         transaction.commit()
         self.browser.open(self.portal_url)
-        self.assertTrue(message.encode("utf8") in self.browser.contents)
+        self.assertIn(message, self.browser.contents)
