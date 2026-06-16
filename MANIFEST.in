@@ -1,10 +1,10 @@
-include *.rst
-include *.txt
-include .coveragerc
-include buildout.cfg
+global-exclude *pyc
+include setup.py
+include *.rst *.txt
+exclude .coveragerc
 recursive-include docs *.GPL
 recursive-include docs *.txt
-recursive-include wildcard *.png
-recursive-include wildcard *.py
-recursive-include wildcard *.xml
-recursive-include wildcard *.zcml
+graft src
+include pyproject.toml
+recursive-exclude news *
+exclude news *.yml __pycache__

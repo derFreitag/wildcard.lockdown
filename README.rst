@@ -24,7 +24,7 @@ addCommitCondition parameters
 -----------------------------
 
 name(required)
-	Name of condition that'll show up in the management inteface
+	Name of condition that'll show up in the management interface
 path
 	An enabling glob expression. This path is always based off the relative
 	Plone site, not the Zope root.
