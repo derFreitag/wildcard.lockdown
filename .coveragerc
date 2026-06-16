@@ -1,2 +1,2 @@
 [report]
-include = wildcard/*
+include = src/*
