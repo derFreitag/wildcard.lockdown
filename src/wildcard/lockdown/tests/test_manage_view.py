@@ -57,7 +57,7 @@ class TestManageView(unittest.TestCase):
         }
 
         # Simulate a POST with the new options.
-        for k, v in new_options.iteritems():
+        for k, v in new_options.items():
             self.request.form[k] = v
         self.request["REQUEST_METHOD"] = "POST"
         result = self._render_view()
@@ -80,14 +80,14 @@ class TestManageView(unittest.TestCase):
         }
 
         # Simulate a POST with the new options.
-        for k, v in new_options.iteritems():
+        for k, v in new_options.items():
             self.request.form[k] = v
         self.request["REQUEST_METHOD"] = "POST"
         result = self._render_view()
         self.assertEqual(result, "OK")
 
         current_options = self._adjust_dict_to_json(self._get_options_as_dict())
-        for k, v in current_options.iteritems():
+        for k, v in current_options.items():
             if k in new_options:
                 self.assertEqual(new_options[k], current_options[k])
             else:
@@ -101,10 +101,10 @@ class TestManageView(unittest.TestCase):
         return json.loads(result)
 
     def _adjust_dict_to_json(self, d):
-        return {k: (list(v) if isinstance(v, set) else v) for (k, v) in d.iteritems()}
+        return {k: (list(v) if isinstance(v, set) else v) for (k, v) in d.items()}
 
     def _set_options(self, **kwargs):
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             setattr(self._settings, k, v)
 
     def _get_options_as_dict(self):

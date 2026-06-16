@@ -40,7 +40,7 @@ class ManageLockdownView(BrowserView):
         return self._error_response("Invalid HTTP method.", status=405)
 
     def _set_options(self, options, raise_exceptions=False):
-        for k, v in options.iteritems():
+        for k, v in options.items():
             logger.info(
                 'Setting "{name}" to {value} {type}'.format(
                     name=k, value=repr(v), type=type(v)
