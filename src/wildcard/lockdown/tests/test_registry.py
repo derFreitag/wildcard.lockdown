@@ -4,6 +4,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.registry import Registry
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import get_installer
 from wildcard.lockdown.interfaces import ILayer
 from wildcard.lockdown.interfaces import ISettings
 from wildcard.lockdown.testing import Lockdown_INTEGRATION_TESTING
@@ -62,11 +63,12 @@ class RegistryUninstallTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         self.registry = getUtility(IRegistry)
         # uninstall the package
-        self.qi = getattr(self.portal, "portal_quickinstaller")
-        self.qi.uninstallProducts(products=["wildcard.lockdown"])
+        self.qi = get_installer(self.portal, self.request)
+        self.qi.uninstall_product("wildcard.lockdown")
 
     def test_records_removed_from_registry(self):
         records = [

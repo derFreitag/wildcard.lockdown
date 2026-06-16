@@ -28,6 +28,7 @@
       description="uninstalls the Lockdown package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/uninstall"
+      post_handler="wildcard.lockdown.setuphandlers.uninstall_various"
       />
 
   <utility
