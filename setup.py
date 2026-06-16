@@ -24,6 +24,7 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
@@ -36,7 +37,7 @@ setup(
     license="GPL",
     include_package_data=True,
     zip_safe=False,
-    python_requires=">=3.11",
+    python_requires=">=3.10",
     install_requires=[
         "Products.CMFPlone",
         "plone.api",
