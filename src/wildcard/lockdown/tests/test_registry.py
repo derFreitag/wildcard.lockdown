@@ -23,19 +23,16 @@ class RegistryTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         # set up settings registry
         self.registry = Registry()
         self.registry.registerInterface(ISettings)
 
-        request = self.portal.REQUEST
-        alsoProvides(request, ILayer)
+        alsoProvides(self.request, ILayer)
 
     def test_controlpanel_view(self):
-        view = getMultiAdapter(
-            (self.portal, self.portal.REQUEST), name="lockdown-settings"
-        )
-        view = view.__of__(self.portal)
+        view = getMultiAdapter((self.portal, self.request), name="lockdown-settings")
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
