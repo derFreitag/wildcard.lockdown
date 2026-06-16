@@ -9,6 +9,13 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0a0.post1 (2026-06-16)
+
+
+### Internal
+
+- Re-release fixing CHANGES @gforcada 
+
 ## 3.0.0a0.post0 (2026-06-16)
 
 Bug fixes:
