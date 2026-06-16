@@ -51,7 +51,7 @@ class ManageLockdownView(BrowserView):
             except Exception as e:
                 if raise_exceptions:
                     raise
-                return self._error_response(unicode(e))
+                return self._error_response(e)
 
         return self._json_response("OK", status=200)
 
