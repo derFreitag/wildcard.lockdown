@@ -39,11 +39,17 @@ setup(
     zip_safe=False,
     python_requires=">=3.10",
     install_requires=[
-        "Products.CMFPlone",
         "plone.api",
         "plone.app.registry",
+        "plone.registry",
+        "Products.CMFPlone",
+        "Products.CMFCore",
+        "Zope",
+        "z3c.form",
     ],
-    extras_require={"test": ["plone.app.testing"]},
+    extras_require={
+        "test": ["plone.app.contenttypes", "plone.app.testing", "plone.testing"]
+    },
     entry_points="""
     [plone.autoinclude.plugin]
     target = plone
