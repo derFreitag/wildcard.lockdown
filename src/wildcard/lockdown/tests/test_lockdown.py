@@ -3,16 +3,13 @@ from plone.testing.z2 import Browser
 from wildcard.lockdown.interfaces import ISettings
 from wildcard.lockdown.testing import browserLogin
 from wildcard.lockdown.testing import createObject
-from wildcard.lockdown.testing import IS_PLONE_5
 from wildcard.lockdown.testing import Lockdown_FUNCTIONAL_TESTING
 from zope.component import getUtility
 
 import transaction
 import unittest
 
-title_filed = "title"
-if IS_PLONE_5:
-    title_filed = "form.widgets.IDublinCore.title"
+title_filed = "form.widgets.IDublinCore.title"
 
 
 class TestLockdown(unittest.TestCase):

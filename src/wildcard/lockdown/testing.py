@@ -1,4 +1,3 @@
-from plone import api
 from plone.app.testing import applyProfile
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
@@ -11,17 +10,14 @@ from plone.app.testing.layers import IntegrationTesting
 from plone.testing import z2
 from zope.configuration import xmlconfig
 
-IS_PLONE_5 = api.env.plone_version().startswith("5")
-
 
 class Lockdown(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        if IS_PLONE_5:
-            import plone.app.contenttypes
+        import plone.app.contenttypes
 
-            self.loadZCML(package=plone.app.contenttypes)
+        self.loadZCML(package=plone.app.contenttypes)
         # load ZCML
         import wildcard.lockdown
 
@@ -31,8 +27,7 @@ class Lockdown(PloneSandboxLayer):
         z2.installProduct(app, "wildcard.lockdown")
 
     def setUpPloneSite(self, portal):
-        if IS_PLONE_5:
-            applyProfile(portal, "plone.app.contenttypes:default")
+        applyProfile(portal, "plone.app.contenttypes:default")
 
         # install into the Plone site
         applyProfile(portal, "wildcard.lockdown:default")
