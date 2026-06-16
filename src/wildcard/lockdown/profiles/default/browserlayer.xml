@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layers>
-    <layer name="wildcard.lockdown" 
-           interface="wildcard.lockdown.interfaces.ILayer" />
+  <layer interface="wildcard.lockdown.interfaces.ILayer"
+         name="wildcard.lockdown"
+  />
 </layers>
-
