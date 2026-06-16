@@ -1,7 +1,8 @@
-import unittest
-from wildcard.lockdown.testing import Lockdown_FUNCTIONAL_TESTING
-from wildcard.lockdown import CommitChecker
 from wildcard.lockdown import addCommitCondition
+from wildcard.lockdown import CommitChecker
+from wildcard.lockdown.testing import Lockdown_FUNCTIONAL_TESTING
+
+import unittest
 
 
 class FakePT:

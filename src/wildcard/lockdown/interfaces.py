@@ -1,6 +1,6 @@
 """Interfaces."""
-from zope import schema
 from wildcard.lockdown import _
+from zope import schema
 from zope.interface import Interface
 
 

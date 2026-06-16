@@ -1,8 +1,8 @@
 """Provide the `uninstall` function."""
-from Products.CMFCore.utils import getToolByName
-from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
+from Products.CMFCore.utils import getToolByName
 from wildcard.lockdown.interfaces import ISettings
+from zope.component import getUtility
 
 
 def uninstall(context, reinstall=False):

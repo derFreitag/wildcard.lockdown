@@ -1,11 +1,11 @@
 """Condition checking."""
-from Products.CMFCore.utils import getToolByName
 from plone import api
+from Products.CMFCore.utils import getToolByName
 from zope.i18nmessageid import MessageFactory
+
 import fnmatch
 import logging
 import re
-
 
 try:
     from zope.app.component.hooks import getSite

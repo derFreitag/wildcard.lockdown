@@ -1,14 +1,14 @@
 """Event handlers."""
-from ZPublisher.interfaces import IPubAfterTraversal
 from plone import api
 from wildcard.lockdown import CommitChecker
 from wildcard.lockdown import logger
 from wildcard.lockdown.interfaces import ILayer
 from wildcard.lockdown.interfaces import ISettings
 from zope.component import adapter
+from ZPublisher.interfaces import IPubAfterTraversal
+
 import traceback
 import transaction
-
 
 # meta types we're not going to bother checking
 # for various reasons

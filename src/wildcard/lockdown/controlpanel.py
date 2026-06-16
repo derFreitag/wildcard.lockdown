@@ -1,11 +1,11 @@
 from plone.app.registry.browser import controlpanel
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from wildcard.lockdown import _
-from zope.schema.vocabulary import SimpleVocabulary
-from zope.interface import implementer
-from zope.schema.interfaces import IVocabularyFactory
 from wildcard.lockdown import getConditionNames
 from wildcard.lockdown.interfaces import ISettings
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from zope.interface import implementer
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IVocabularyFactory)

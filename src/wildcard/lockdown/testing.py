@@ -1,16 +1,15 @@
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
+from plone import api
 from plone.app.testing import applyProfile
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import TEST_USER_PASSWORD
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import TEST_USER_PASSWORD
 from plone.app.testing.layers import FunctionalTesting
 from plone.app.testing.layers import IntegrationTesting
-from zope.configuration import xmlconfig
 from plone.testing import z2
-from plone import api
-
+from zope.configuration import xmlconfig
 
 IS_PLONE_5 = api.env.plone_version().startswith('5')
 

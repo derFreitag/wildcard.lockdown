@@ -1,21 +1,17 @@
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.registry import Registry
+from plone.registry.interfaces import IRegistry
+from Products.CMFCore.utils import getToolByName
+from wildcard.lockdown.interfaces import ILayer
+from wildcard.lockdown.interfaces import ISettings
+from wildcard.lockdown.testing import Lockdown_INTEGRATION_TESTING
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.interface import alsoProvides
 
 import unittest
-
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plone.registry import Registry
-from plone.registry.interfaces import IRegistry
-
-from Products.CMFCore.utils import getToolByName
-
-from wildcard.lockdown.interfaces import ISettings
-from wildcard.lockdown.testing import Lockdown_INTEGRATION_TESTING
-from wildcard.lockdown.interfaces import ILayer
 
 BASE_REGISTRY = 'wildcard.lockdown.interfaces.ISettings.%s'
 

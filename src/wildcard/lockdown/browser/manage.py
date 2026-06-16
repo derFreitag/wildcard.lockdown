@@ -1,9 +1,10 @@
 """View to manage lockdown settings."""
 
 from ..interfaces import ISettings
-from Products.Five.browser import BrowserView
 from plone import api
+from Products.Five.browser import BrowserView
 from wildcard.lockdown import logger
+
 import json
 
 MISSING = object()

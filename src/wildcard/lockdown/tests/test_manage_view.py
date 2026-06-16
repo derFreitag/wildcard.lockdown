@@ -1,14 +1,15 @@
-import unittest
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
-from plone.app.testing import setRoles
-from wildcard.lockdown.testing import Lockdown_INTEGRATION_TESTING
+from ..interfaces import ISettings
 from AccessControl import Unauthorized
 from plone import api
-import json
-from ..interfaces import ISettings
-from zope.component import getUtility
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
+from wildcard.lockdown.testing import Lockdown_INTEGRATION_TESTING
+from zope.component import getUtility
+
+import json
+import unittest
 
 
 class TestManageView(unittest.TestCase):
