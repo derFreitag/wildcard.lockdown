@@ -12,28 +12,28 @@ class ISettings(Interface):
     """Add-on settings."""
 
     enabled = schema.Bool(
-        title=_(u'Enabled'),
-        description=_(u'If enabled, it will by default make the entire site '
-                      u'read-only unless it is in debug mode or one of the '
-                      u'activated conditions are met. Basically, this could '
-                      u'mean that you will prevent yourself from disabling '
-                      u'this feature unless you uninstall the package.'),
+        title=_('Enabled'),
+        description=_('If enabled, it will by default make the entire site '
+                      'read-only unless it is in debug mode or one of the '
+                      'activated conditions are met. Basically, this could '
+                      'mean that you will prevent yourself from disabling '
+                      'this feature unless you uninstall the package.'),
         default=False)
 
     activated = schema.Set(
-        title=_(u'Activated Commit Conditions'),
-        description=_(u'Select the conditions under which something can be '
-                      u'committed to the database. Only one rules needs to '
-                      u'be valid to allow commits to occur.'),
-        value_type=schema.Choice(vocabulary=u'wildcard.lockdown.conditions'),
+        title=_('Activated Commit Conditions'),
+        description=_('Select the conditions under which something can be '
+                      'committed to the database. Only one rules needs to '
+                      'be valid to allow commits to occur.'),
+        value_type=schema.Choice(vocabulary='wildcard.lockdown.conditions'),
         default=set(),
         missing_value=set(),
         required=False)
 
     status_message = schema.Text(
-        title=_(u'Status message'),
-        description=_(u'An status message to be displayed to authenticated '
-                      u'users users when the lockdown is enabled. Leave empty to '
-                      u'display nothing.'),
+        title=_('Status message'),
+        description=_('An status message to be displayed to authenticated '
+                      'users users when the lockdown is enabled. Leave empty to '
+                      'display nothing.'),
         required=False,
-        default=u'')
+        default='')

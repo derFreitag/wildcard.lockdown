@@ -26,7 +26,7 @@ def initialize(context):
     """
 
 
-class CommitChecker(object):
+class CommitChecker:
     """Check commit conditions."""
 
     def __init__(self, req, conditions):

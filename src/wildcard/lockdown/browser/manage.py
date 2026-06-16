@@ -28,7 +28,7 @@ class ManageLockdownView(BrowserView):
 
         if options and (method != 'POST'):
             return self._error_response(
-                u'To set options use the POST HTTP method.',
+                'To set options use the POST HTTP method.',
                 status=405
             )
 
@@ -37,7 +37,7 @@ class ManageLockdownView(BrowserView):
         elif method == 'GET':
             return self._get_options()
 
-        return self._error_response(u'Invalid HTTP method.', status=405)
+        return self._error_response('Invalid HTTP method.', status=405)
 
     def _set_options(self, options, raise_exceptions=False):
         for (k, v) in options.iteritems():
@@ -54,7 +54,7 @@ class ManageLockdownView(BrowserView):
                     raise
                 return self._error_response(unicode(e))
 
-        return self._json_response(u'OK', status=200)
+        return self._json_response('OK', status=200)
 
     def _get_options(self):
         return self._json_response({

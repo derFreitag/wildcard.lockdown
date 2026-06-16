@@ -31,7 +31,7 @@ class TestManageView(unittest.TestCase):
     def test_can_get_options(self):
         current_options = {
             'enabled': False,
-            'activated': {u'All POST'},
+            'activated': {'All POST'},
             'status_message': None
         }
         self._set_options(**current_options)
@@ -42,15 +42,15 @@ class TestManageView(unittest.TestCase):
     def test_can_set_options(self):
         old_options = {
             'enabled': False,
-            'activated': {u'All POST'},
-            'status_message': u'Test status message.'
+            'activated': {'All POST'},
+            'status_message': 'Test status message.'
         }
         self._set_options(**old_options)
 
         new_options = {
             'enabled': True,
-            'activated': [u'Logged in user'],  # JSON does not have sets.
-            'status_message': u'Other status message',
+            'activated': ['Logged in user'],  # JSON does not have sets.
+            'status_message': 'Other status message',
         }
 
         # Simulate a POST with the new options.
@@ -58,7 +58,7 @@ class TestManageView(unittest.TestCase):
             self.request.form[k] = v
         self.request['REQUEST_METHOD'] = 'POST'
         result = self._render_view()
-        self.assertEqual(result, u'OK')
+        self.assertEqual(result, 'OK')
 
         self.assertDictEqual(
             self._adjust_dict_to_json(self._get_options_as_dict()),
@@ -67,13 +67,13 @@ class TestManageView(unittest.TestCase):
     def test_omited_options_remains_unchanged(self):
         old_options = {
             'enabled': False,
-            'activated': {u'All POST'},
-            'status_message': u'Test status message.'
+            'activated': {'All POST'},
+            'status_message': 'Test status message.'
         }
         self._set_options(**old_options)
 
         new_options = {
-            'activated': [u'Logged in user'],  # JSON does not have sets.
+            'activated': ['Logged in user'],  # JSON does not have sets.
         }
 
         # Simulate a POST with the new options.
@@ -81,7 +81,7 @@ class TestManageView(unittest.TestCase):
             self.request.form[k] = v
         self.request['REQUEST_METHOD'] = 'POST'
         result = self._render_view()
-        self.assertEqual(result, u'OK')
+        self.assertEqual(result, 'OK')
 
         current_options = self._adjust_dict_to_json(self._get_options_as_dict())
         for (k, v) in current_options.iteritems():

@@ -38,7 +38,7 @@ class RegistryTest(unittest.TestCase):
         view = getMultiAdapter((self.portal, self.portal.REQUEST),
                                name='lockdown-settings')
         view = view.__of__(self.portal)
-        self.failUnless(view())
+        self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
@@ -50,13 +50,13 @@ class RegistryTest(unittest.TestCase):
     def test_action_in_controlpanel(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         actions = [a.getAction(self)['id'] for a in cp.listActions()]
-        self.failUnless('lockdown' in actions)
+        self.assertTrue('lockdown' in actions)
 
     def test_activated_record(self):
         record = self.registry.records[
             BASE_REGISTRY % 'activated']
-        self.failUnless('activated' in ISettings)
-        self.assertEquals(record.value, set([]))
+        self.assertTrue('activated' in ISettings)
+        self.assertEqual(record.value, set())
 
 
 class RegistryUninstallTest(unittest.TestCase):
@@ -77,13 +77,13 @@ class RegistryUninstallTest(unittest.TestCase):
             'wildcard.lockdown.interfaces.ISettings.enabled'
             ]
         for r in records:
-            self.failIf(r in self.registry.records,
+            self.assertFalse(r in self.registry.records,
                         '%s record still in configuration registry' % r)
 
     def test_action_no_longer_in_controlpanel(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         actions = [a.getAction(self)['id'] for a in cp.listActions()]
-        self.failUnless('lockdown' not in actions)
+        self.assertTrue('lockdown' not in actions)
 
 
 def test_suite():

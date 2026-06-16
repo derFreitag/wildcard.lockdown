@@ -4,7 +4,7 @@ from wildcard.lockdown import CommitChecker
 from wildcard.lockdown import addCommitCondition
 
 
-class FakePT(object):
+class FakePT:
     def __init__(self, pt):
         self.portal_type = pt
 

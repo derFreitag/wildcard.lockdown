@@ -45,7 +45,7 @@ def doomIt(event):
             # skip out of here first
             return
 
-        status_message = _get_setting('status_message', None) or u''
+        status_message = _get_setting('status_message', None) or ''
         status_message = status_message.strip()
         if status_message and (not api.user.is_anonymous()):
             api.portal.show_message(

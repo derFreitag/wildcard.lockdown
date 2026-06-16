@@ -9,7 +9,7 @@ from wildcard.lockdown.interfaces import ISettings
 
 
 @implementer(IVocabularyFactory)
-class ConditionsVocabulary(object):
+class ConditionsVocabulary:
     """Creates a vocabulary with all the routes available on the
     site.
     """
@@ -26,12 +26,12 @@ ConditionsVocabularyFactory = ConditionsVocabulary()
 
 class LockdownSettingsEditForm(controlpanel.RegistryEditForm):
     schema = ISettings
-    label = _(u'Lockdown Settings')
-    description = _(u'Here you can modify the settings for '
-                    u'locking down writes to database.')
+    label = _('Lockdown Settings')
+    description = _('Here you can modify the settings for '
+                    'locking down writes to database.')
 
     def updateFields(self):
-        super(LockdownSettingsEditForm, self).updateFields()
+        super().updateFields()
         self.fields['activated'].widgetFactory = CheckBoxFieldWidget
 
 

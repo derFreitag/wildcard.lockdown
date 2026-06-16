@@ -42,12 +42,12 @@ class TestLockdown(unittest.TestCase):
     def activateCondition(self, name=None):
         self._settings.enabled = True
         if name:
-            self._settings.activated = set((name,))
+            self._settings.activated = {name}
         transaction.commit()
 
     def disableConditions(self):
         self._settings.enabled = False
-        self._settings.activated = set(())
+        self._settings.activated = set()
         transaction.commit()
 
     def changeTitle(self, url, newtitle):
@@ -83,7 +83,7 @@ class TestLockdown(unittest.TestCase):
         self.assertTrue(newtitle in self.browser.contents)
 
     def test_show_status_message(self):
-        message = u'This site is in read-only mode!!!'
+        message = 'This site is in read-only mode!!!'
         self.activateCondition()
         self.browser.open(self.portal_url)
         self.assertFalse(message.encode('utf8') in self.browser.contents)
