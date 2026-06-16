@@ -17,22 +17,23 @@ class ConditionsVocabulary:
     def __call__(self, context):
         items = []
         for name in getConditionNames():
-            items.append(SimpleVocabulary.createTerm(name,
-                                                     name,
-                                                     name))
+            items.append(SimpleVocabulary.createTerm(name, name, name))
         return SimpleVocabulary(items)
+
+
 ConditionsVocabularyFactory = ConditionsVocabulary()
 
 
 class LockdownSettingsEditForm(controlpanel.RegistryEditForm):
     schema = ISettings
-    label = _('Lockdown Settings')
-    description = _('Here you can modify the settings for '
-                    'locking down writes to database.')
+    label = _("Lockdown Settings")
+    description = _(
+        "Here you can modify the settings for " "locking down writes to database."
+    )
 
     def updateFields(self):
         super().updateFields()
-        self.fields['activated'].widgetFactory = CheckBoxFieldWidget
+        self.fields["activated"].widgetFactory = CheckBoxFieldWidget
 
 
 class LockdownConfiglet(controlpanel.ControlPanelFormWrapper):

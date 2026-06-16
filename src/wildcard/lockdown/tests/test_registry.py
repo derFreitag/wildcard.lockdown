@@ -13,7 +13,7 @@ from zope.interface import alsoProvides
 
 import unittest
 
-BASE_REGISTRY = 'wildcard.lockdown.interfaces.ISettings.%s'
+BASE_REGISTRY = "wildcard.lockdown.interfaces.ISettings.%s"
 
 
 class RegistryTest(unittest.TestCase):
@@ -21,8 +21,8 @@ class RegistryTest(unittest.TestCase):
     layer = Lockdown_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         # set up settings registry
         self.registry = Registry()
         self.registry.registerInterface(ISettings)
@@ -31,27 +31,28 @@ class RegistryTest(unittest.TestCase):
         alsoProvides(request, ILayer)
 
     def test_controlpanel_view(self):
-        view = getMultiAdapter((self.portal, self.portal.REQUEST),
-                               name='lockdown-settings')
+        view = getMultiAdapter(
+            (self.portal, self.portal.REQUEST), name="lockdown-settings"
+        )
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
+
         logout()
-        self.assertRaises(Unauthorized,
-                          self.portal.restrictedTraverse,
-                          '@@lockdown-settings')
+        self.assertRaises(
+            Unauthorized, self.portal.restrictedTraverse, "@@lockdown-settings"
+        )
 
     def test_action_in_controlpanel(self):
-        cp = getToolByName(self.portal, 'portal_controlpanel')
-        actions = [a.getAction(self)['id'] for a in cp.listActions()]
-        self.assertTrue('lockdown' in actions)
+        cp = getToolByName(self.portal, "portal_controlpanel")
+        actions = [a.getAction(self)["id"] for a in cp.listActions()]
+        self.assertTrue("lockdown" in actions)
 
     def test_activated_record(self):
-        record = self.registry.records[
-            BASE_REGISTRY % 'activated']
-        self.assertTrue('activated' in ISettings)
+        record = self.registry.records[BASE_REGISTRY % "activated"]
+        self.assertTrue("activated" in ISettings)
         self.assertEqual(record.value, set())
 
 
@@ -60,26 +61,28 @@ class RegistryUninstallTest(unittest.TestCase):
     layer = Lockdown_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         self.registry = getUtility(IRegistry)
         # uninstall the package
-        self.qi = getattr(self.portal, 'portal_quickinstaller')
-        self.qi.uninstallProducts(products=['wildcard.lockdown'])
+        self.qi = getattr(self.portal, "portal_quickinstaller")
+        self.qi.uninstallProducts(products=["wildcard.lockdown"])
 
     def test_records_removed_from_registry(self):
         records = [
-            'wildcard.lockdown.interfaces.ISettings.activated',
-            'wildcard.lockdown.interfaces.ISettings.enabled'
-            ]
+            "wildcard.lockdown.interfaces.ISettings.activated",
+            "wildcard.lockdown.interfaces.ISettings.enabled",
+        ]
         for r in records:
-            self.assertFalse(r in self.registry.records,
-                        '%s record still in configuration registry' % r)
+            self.assertFalse(
+                r in self.registry.records,
+                "%s record still in configuration registry" % r,
+            )
 
     def test_action_no_longer_in_controlpanel(self):
-        cp = getToolByName(self.portal, 'portal_controlpanel')
-        actions = [a.getAction(self)['id'] for a in cp.listActions()]
-        self.assertTrue('lockdown' not in actions)
+        cp = getToolByName(self.portal, "portal_controlpanel")
+        actions = [a.getAction(self)["id"] for a in cp.listActions()]
+        self.assertTrue("lockdown" not in actions)
 
 
 def test_suite():

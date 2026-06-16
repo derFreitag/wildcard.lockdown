@@ -1,4 +1,5 @@
 """Condition checking."""
+
 from plone import api
 from Products.CMFCore.utils import getToolByName
 from zope.i18nmessageid import MessageFactory
@@ -12,10 +13,10 @@ try:
 except ImportError:
     from zope.component.hooks import getSite
 
-_ = MessageFactory('collective.routes')
-logger = logging.getLogger('wildcard.lockdown')
+_ = MessageFactory("collective.routes")
+logger = logging.getLogger("wildcard.lockdown")
 
-_globbed_params = ('path', 'host')
+_globbed_params = ("path", "host")
 _conditions = {}
 
 
@@ -37,8 +38,8 @@ class CommitChecker:
     @property
     def site(self):
         """Return the portal root object."""
-        if not hasattr(self, '_site'):
-            urltool = getToolByName(self.req.PARENTS[0], 'portal_url', None)
+        if not hasattr(self, "_site"):
+            urltool = getToolByName(self.req.PARENTS[0], "portal_url", None)
             if urltool is None:
                 self._site = getSite()
             else:
@@ -48,12 +49,11 @@ class CommitChecker:
     @property
     def req_path(self):
         """Return the path."""
-        if not hasattr(self, '_req_path'):
-            fullpath = self.req.physicalPathFromURL(
-                self.req.get('ACTUAL_URL', ''))
+        if not hasattr(self, "_req_path"):
+            fullpath = self.req.physicalPathFromURL(self.req.get("ACTUAL_URL", ""))
             site_path = self.site.getPhysicalPath()
-            path = fullpath[len(site_path):]
-            self._req_path = '/' + '/'.join(path).lstrip('/')
+            path = fullpath[len(site_path) :]
+            self._req_path = "/" + "/".join(path).lstrip("/")
         return self._req_path
 
     def _check_path(self, regex):
@@ -63,20 +63,17 @@ class CommitChecker:
         return False
 
     def _check_request_method(self, method):
-        req_meth = self.req.get('REQUEST_METHOD', '')
+        req_meth = self.req.get("REQUEST_METHOD", "")
         return method.lower() == req_meth.lower()
 
     def _check_portal_type(self, pt):
         item = self.req.PARENTS[0]
-        portal_type = getattr(
-            getattr(item, 'aq_base', item),
-            'portal_type',
-            None)
+        portal_type = getattr(getattr(item, "aq_base", item), "portal_type", None)
         return portal_type == pt
 
     def _check_host(self, regex):
-        base1 = self.req.get('BASE1')
-        _, base1 = base1.split('://', 1)
+        base1 = self.req.get("BASE1")
+        _, base1 = base1.split("://", 1)
         host = base1.lower()
         if regex.match(host):
             return True
@@ -86,7 +83,7 @@ class CommitChecker:
         return func(self.req)
 
     def _check_logged_in(self, _):
-        mt = getToolByName(self.site, 'portal_membership', None)
+        mt = getToolByName(self.site, "portal_membership", None)
         if not mt:
             return False
         return not mt.isAnonymousUser()
@@ -113,12 +110,13 @@ class CommitChecker:
         return False
 
     _valid_args = {
-        'path': _check_path,
-        'request_method': _check_request_method,
-        'portal_type': _check_portal_type,
-        'host': _check_host,
-        'custom': _check_custom,
-        'logged_in': _check_logged_in}
+        "path": _check_path,
+        "request_method": _check_request_method,
+        "portal_type": _check_portal_type,
+        "host": _check_host,
+        "custom": _check_custom,
+        "logged_in": _check_logged_in,
+    }
 
 
 def addCommitCondition(name, **kwargs):
@@ -136,31 +134,23 @@ def getConditionNames():
 
 
 def _isManager(request):
-    return 'Manager' in api.user.get_roles()
+    return "Manager" in api.user.get_roles()
 
 
 addCommitCondition(
     "Allow Lockdown Settings Editing",
     path="/@@lockdown-settings",
-    request_method='POST',
-    portal_type="Plone Site")
+    request_method="POST",
+    portal_type="Plone Site",
+)
 addCommitCondition(
     "Web API",
     path="/@@manage-lockdown",
-    request_method='POST',
-    portal_type="Plone Site")
-addCommitCondition(
-    "Logged in user",
-    logged_in=True)
-addCommitCondition(
-    "Manager user",
-    custom=_isManager)
-addCommitCondition(
-    "All POST",
-    request_method='POST')
-addCommitCondition(
-    "Only localhost",
-    host='localhost:*')
-addCommitCondition(
-    "Only 127.0.0.1",
-    host='127.0.0.1:*')
+    request_method="POST",
+    portal_type="Plone Site",
+)
+addCommitCondition("Logged in user", logged_in=True)
+addCommitCondition("Manager user", custom=_isManager)
+addCommitCondition("All POST", request_method="POST")
+addCommitCondition("Only localhost", host="localhost:*")
+addCommitCondition("Only 127.0.0.1", host="127.0.0.1:*")

@@ -10,9 +10,9 @@ from zope.component import getUtility
 import transaction
 import unittest
 
-title_filed = 'title'
+title_filed = "title"
 if IS_PLONE_5:
-    title_filed = 'form.widgets.IDublinCore.title'
+    title_filed = "form.widgets.IDublinCore.title"
 
 
 class TestLockdown(unittest.TestCase):
@@ -21,21 +21,20 @@ class TestLockdown(unittest.TestCase):
 
     def setUp(self):
         from wildcard.lockdown import addCommitCondition
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
+
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
-        addCommitCondition("user-area",
-            path="/users*",
-            request_method="POST")
-        folder = createObject(self.portal, 'Folder', 'users')
-        createObject(folder, 'News Item', 'test1', title="Test 1")
-        createObject(folder, 'News Item', 'test2', title="Test 2")
-        createObject(self.portal, 'Document', 'testpage', title="Test page")
+        addCommitCondition("user-area", path="/users*", request_method="POST")
+        folder = createObject(self.portal, "Folder", "users")
+        createObject(folder, "News Item", "test1", title="Test 1")
+        createObject(folder, "News Item", "test2", title="Test 2")
+        createObject(self.portal, "Document", "testpage", title="Test page")
         registry = getUtility(IRegistry)
         self._settings = registry.forInterface(ISettings)
 
         transaction.commit()
-        self.browser = Browser(self.layer['app'])
+        self.browser = Browser(self.layer["app"])
         self.browser.handleErrors = False
         browserLogin(self.portal, self.browser)
 
@@ -51,13 +50,13 @@ class TestLockdown(unittest.TestCase):
         transaction.commit()
 
     def changeTitle(self, url, newtitle):
-        self.browser.open(url + '/edit')
+        self.browser.open(url + "/edit")
         self.browser.getControl(name=title_filed).value = newtitle
-        self.browser.getControl('Save').click()
+        self.browser.getControl("Save").click()
 
     def test_prevents_committing_to_database(self):
         self.activateCondition()
-        baseurl = self.portal_url + '/testpage'
+        baseurl = self.portal_url + "/testpage"
         newtitle = "EDITED TITLE"
         self.browser.open(baseurl)
         self.assertTrue(newtitle not in self.browser.contents)
@@ -66,7 +65,7 @@ class TestLockdown(unittest.TestCase):
 
     def test_allows_writing_to_database(self):
         self.disableConditions()
-        baseurl = self.portal_url + '/testpage'
+        baseurl = self.portal_url + "/testpage"
         newtitle = "EDITED TITLE"
         self.browser.open(baseurl)
         self.assertTrue(newtitle not in self.browser.contents)
@@ -74,8 +73,8 @@ class TestLockdown(unittest.TestCase):
         self.assertTrue(newtitle in self.browser.contents)
 
     def test_condition_should_allow_commit(self):
-        self.activateCondition('user-area')
-        baseurl = self.portal_url + '/users/test1'
+        self.activateCondition("user-area")
+        baseurl = self.portal_url + "/users/test1"
         newtitle = "EDITED TITLE"
         self.browser.open(baseurl)
         self.assertTrue(newtitle not in self.browser.contents)
@@ -83,12 +82,12 @@ class TestLockdown(unittest.TestCase):
         self.assertTrue(newtitle in self.browser.contents)
 
     def test_show_status_message(self):
-        message = 'This site is in read-only mode!!!'
+        message = "This site is in read-only mode!!!"
         self.activateCondition()
         self.browser.open(self.portal_url)
-        self.assertFalse(message.encode('utf8') in self.browser.contents)
+        self.assertFalse(message.encode("utf8") in self.browser.contents)
 
         self._settings.status_message = message
         transaction.commit()
         self.browser.open(self.portal_url)
-        self.assertTrue(message.encode('utf8') in self.browser.contents)
+        self.assertTrue(message.encode("utf8") in self.browser.contents)

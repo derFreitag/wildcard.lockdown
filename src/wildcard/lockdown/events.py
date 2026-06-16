@@ -1,4 +1,5 @@
 """Event handlers."""
+
 from plone import api
 from wildcard.lockdown import CommitChecker
 from wildcard.lockdown import logger
@@ -13,15 +14,15 @@ import transaction
 # meta types we're not going to bother checking
 # for various reasons
 _blacklisted_meta_types = {
-    'Image',
-    'File',
-    'Filesystem Image',
-    'Filesystem File',
-    'Stylesheets Registry',
-    'JavaScripts Registry',
-    'DirectoryViewSurrogate',
-    'KSS Registry',
-    'Filesystem Directory View',
+    "Image",
+    "File",
+    "Filesystem Image",
+    "Filesystem File",
+    "Stylesheets Registry",
+    "JavaScripts Registry",
+    "DirectoryViewSurrogate",
+    "KSS Registry",
+    "Filesystem Directory View",
 }
 
 
@@ -37,24 +38,22 @@ def doomIt(event):
     request = event.request
     published = request.PARENTS[0]
     mt = getattr(
-        getattr(published, 'aq_base', None),
-        'meta_type',
-        getattr(published, 'meta_type', None))
+        getattr(published, "aq_base", None),
+        "meta_type",
+        getattr(published, "meta_type", None),
+    )
     if (mt not in _blacklisted_meta_types) and ILayer.providedBy(request):
-        if not _get_setting('enabled', False):
+        if not _get_setting("enabled", False):
             # skip out of here first
             return
 
-        status_message = _get_setting('status_message', None) or ''
+        status_message = _get_setting("status_message", None) or ""
         status_message = status_message.strip()
         if status_message and (not api.user.is_anonymous()):
-            api.portal.show_message(
-                status_message,
-                request=request,
-                type='warn')
+            api.portal.show_message(status_message, request=request, type="warn")
 
         # let's check if this is valid now.
-        activated = _get_setting('activated', set())
+        activated = _get_setting("activated", set())
         try:
             checker = CommitChecker(request, activated)
             if checker.can_commit():
@@ -62,14 +61,14 @@ def doomIt(event):
         except Exception:
             # if there is any error, ignore and doom. better to be safe...
             logger.warn(
-                'Error checking conditions, dooming the '
-                'transaction: {}'.format(traceback.format_exc()))
+                "Error checking conditions, dooming the "
+                "transaction: {}".format(traceback.format_exc())
+            )
 
         transaction.doom()
 
 
 def _get_setting(name, default=api.portal.MISSING):
     return api.portal.get_registry_record(
-        name=name,
-        interface=ISettings,
-        default=default)
+        name=name, interface=ISettings, default=default
+    )
