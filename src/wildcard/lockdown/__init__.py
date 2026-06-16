@@ -2,16 +2,12 @@
 
 from plone import api
 from Products.CMFCore.utils import getToolByName
+from zope.component.hooks import getSite
 from zope.i18nmessageid import MessageFactory
 
 import fnmatch
 import logging
 import re
-
-try:
-    from zope.app.component.hooks import getSite
-except ImportError:
-    from zope.component.hooks import getSite
 
 _ = MessageFactory("collective.routes")
 logger = logging.getLogger("wildcard.lockdown")
